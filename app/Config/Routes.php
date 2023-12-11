@@ -15,3 +15,5 @@ $routes->get('/login/login-page', 'AdminLoginController::index');
 
 //Post Methods
 $routes->post('create/add-reservation', 'MovieHomeController::save');
+$routes->post('/', 'MovieHomeController::index');
+

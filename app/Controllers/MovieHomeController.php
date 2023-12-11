@@ -4,69 +4,98 @@ namespace App\Controllers;
 
 use App\Models\MovieSeatsModel;
 use App\Models\ReferenceModel;
+use App\Models\CustomersModel;
+use App\Models\SelectedSeatsModel;
 // defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MovieHomeController extends BaseController
 {
+
     protected $helpers = ['form'];
+    protected $mdlSeats, $mdlReference, $mdlCustomer, $mdlSelectedSeats, $data;
+
+
+    public function __construct()
+    {
+        $this->mdlSeats = new MovieSeatsModel();
+        $this->mdlReference = new ReferenceModel();
+        $this->mdlCustomer = new CustomersModel();
+        $this->mdlSelectedSeats = new SelectedSeatsModel();
+        $this->data = [];
+    }
     public function index()
     {
-        $mdlSeats = new MovieSeatsModel();
-        $data['seats'] = $mdlSeats->findAll();
-        return view('movie-home', $data);
+        $this->findData();
+        return view('movie-home', $this->data);
     }
     public function display()
     {
-        $mdlSeats = new MovieSeatsModel();
-        $referenceNumber = new ReferenceModel();
-        $data['seats'] = $mdlSeats->findAll();
-        $data['referenceNumber'] = $referenceNumber->findColumn('id');
-        return view('create/add-reservation', $data);
+        $referenceNumber = $this->mdlReference->select('id')->first();
+        $this->findData();
+        $this->data['referenceNumber'] = $referenceNumber['id'];
+        return view('create/add-reservation', $this->data);
     }
+
+    private function findData()
+    {
+        return $this->data['seats'] = $this->mdlSeats->findAll();
+    }
+
     public function save()
     {
+        //Data from input fields
         $customerName = $this->request->getPost('customerName');
         $referenceNumber = $this->request->getPost('referenceNumber');
         $reservedDate = $this->request->getPost('reservedDate');
-        $seatlist = $this->request->getPost('seatlist');
+        $seatlist = (array) $this->request->getPost('seatlist');
 
 
-        $customerData = [
-            'customerName' => $customerName,
-            'referenceNumber' => $referenceNumber,
-            'seatNumber' => $seatlist,
-            'reservedDate' => $reservedDate
+        //Data array
+        $dataToSave = [
+            'customer' => [
+                'customerName' => $customerName,
+                'referenceNumber' => $referenceNumber,
+                'reservedDate' => $reservedDate
+            ],
+            'selectedSeat' => [
+                'referenceNumber' => $referenceNumber,
+                'seatNumber' => $seatlist,
+            ]
+
         ];
+
         if ($this->request->is('post')) {
-            $rules = [
-                'customerName' => [
-                    'rules' => 'required',
-                    'errors' => [
-                        'required' => 'Full name is required',
-                    ],
-                ],
-                'referenceNumber' => 'required',
-                'seatNumber' => [
-                    'rules' => 'required',
-                    'errors' => [
-                        'required' => 'Please select a seat number',
-                    ],
-                ],
-                'reservedDate' => [
-                    'rules' => 'required',
-                    'errors' => [
-                        'required' => 'Date is required',
-                    ],
-                ]
-            ];
-            if (!$this->validateData($customerData, $rules)) {
-                return redirect()->back()->withInput();
-            } else {
-                dd("save");
+            $validateCustomer = $this->mdlCustomer->validate($dataToSave['customer']);
+            $validateSeat = $this->mdlSelectedSeats->validate($dataToSave['selectedSeat']);
+            if (!$validateCustomer || $validateSeat) {
+                $errors = [];
+                if (!$validateCustomer) {
+                    $errors = array_merge($errors, $this->mdlCustomer->errors());
+                }
+                if (!$validateSeat) {
+                    $errors = array_merge($errors, $this->mdlSelectedSeats->errors());
+                }
+                if (!empty($errors)) {
+                    return redirect()->to('/create/add-reservation')->with('errors', $errors)->withInput();
+                }
             }
+
+
+            $selectedSeatsArr = [];
+            foreach ($dataToSave['selectedSeat']['seatNumber'] as $seat) {
+                $selectedSeatsArr[] = [
+                    'referenceNumber' => $dataToSave['selectedSeat']['referenceNumber'],
+                    'seatNumber' => $seat,
+                ];
+            }
+            $newRef = $referenceNumber + 1;
+
+            $this->mdlCustomer->insert($dataToSave['customer']);
+            $this->mdlSelectedSeats->insertBatch($selectedSeatsArr);
+            $this->mdlReference->whereIn('id', [$referenceNumber])->set(['id' => $newRef])->update();
+            $this->mdlSeats->whereIn('seat_number', $seatlist)->set(['selected' => true])->update();
+            return redirect()->to('/')->with('success', 'Successfully created');
         }
-
-
         return view('create/add-reservation');
     }
 }

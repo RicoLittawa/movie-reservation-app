@@ -12,7 +12,7 @@ class SelectedSeatsModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['referenceNumber','seatNumber'];
+    protected $allowedFields    = ['referenceNumber', 'seatNumber'];
 
     // Dates
     protected $useTimestamps = false;
@@ -22,8 +22,10 @@ class SelectedSeatsModel extends Model
     protected $deletedField  = 'deleted_at';
 
     // Validation
-    protected $validationRules      = [];
-    protected $validationMessages   = [];
+    protected $validationRules      = ['seatNumber' => 'required'];
+    protected $validationMessages   = ['seatNumber' => [
+        'required' => 'Please select a seat'
+    ]];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
 

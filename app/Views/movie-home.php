@@ -3,6 +3,11 @@
 
 <!-- Set the section content -->
 <?= $this->section('content') ?>
+<?php if (session()->has('success')) : ?>
+    <div>
+        <?= esc(session('success')) ?>
+    </div>
+<?php endif ?>
 <div class="d-flex justify-content-between">
     <div class="my-5">
         <h1>Movie Seats</h1>
@@ -12,11 +17,15 @@
         <a href="<?= base_url('create/add-reservation'); ?>" class="btn btn-secondary">Create Reservation</a>
     </div>
 </div>
-<span class="d-flex fw-bold">Label: 
-    <figure class="px-2 d-flex"><img width="24" height="24" src="https://img.icons8.com/material/24/FA5252/bus-seat-top-view.png" alt="bus-seat-top-view" /> <figcaption class="px-1 fw-normal">Reserved</figcaption></figure>
-    <figure class="px-2 d-flex"><img width="24" height="24" src="https://img.icons8.com/material/24/737373/bus-seat-top-view.png" alt="bus-seat-top-view" /> <figcaption class="px-1 fw-normal">Not Occupied</figcaption></figure>
+<span class="d-flex fw-bold">Label:
+    <figure class="px-2 d-flex"><img width="24" height="24" src="https://img.icons8.com/material/24/FA5252/bus-seat-top-view.png" alt="bus-seat-top-view" />
+        <figcaption class="px-1 fw-normal">Reserved</figcaption>
+    </figure>
+    <figure class="px-2 d-flex"><img width="24" height="24" src="https://img.icons8.com/material/24/737373/bus-seat-top-view.png" alt="bus-seat-top-view" />
+        <figcaption class="px-1 fw-normal">Not Occupied</figcaption>
+    </figure>
 </span>
-<div class="bg-secondary mx-5 d-flex justify-content-center py-3 my-3 text-white">
+<div class="bg-secondary mx-5 d-flex justify-content-center py-3 my-5 text-white">
     Now Showing : Godzilla vs King Kong</div>
 <section class="mt-5 pt-5">
     <div class="d-flex justify-content-center">
