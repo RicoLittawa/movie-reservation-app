@@ -53,7 +53,6 @@ class MovieHomeController extends BaseController
         $seatlist = (array) $this->request->getPost('seatlist');
 
 
-
         //Data array
         $dataToSave = [
             'customer' => [

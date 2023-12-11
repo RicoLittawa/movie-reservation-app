@@ -15,6 +15,9 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Fullname</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Contact</th>
                     <th scope="col">Reserve Date</th>
                     <th scope="col">Action</th>
                 </tr>
@@ -24,6 +27,9 @@
                     <tr>
                         <td><?= $key + 1 ?></td>
                         <td><?= $customer['customerName'] ?></td>
+                        <td><?= $customer['customerEmail'] ?></td>
+                        <td><?= $customer['customerAddress'] ?></td>
+                        <td><?= $customer['customerContact'] ?></td>
                         <td><?= $customer['reservedDate'] ?></td>
                         <td>
                             <a href="<?= base_url(route_to('update_reservation', $customer['referenceNumber'])) ?>" class="btn btn-secondary">View</a>

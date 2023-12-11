@@ -12,7 +12,7 @@ class CustomersModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['referenceNumber', 'customerName', 'customerEmail', 'customerAddress', 'costumerContact', 'reservedDate'];
+    protected $allowedFields    = ['referenceNumber', 'customerName', 'customerEmail', 'customerAddress', 'customerContact', 'reservedDate'];
 
     // Dates
     protected $useTimestamps = false;
@@ -53,7 +53,7 @@ class CustomersModel extends Model
         [
             'required' => 'Contact is required',
             'exact_length' => 'Contact must be at least 11 digits',
-            'numeric' => 'Contact must contain numeric characters only',
+            'numeric'=> 'Contact must contain numeric characters only'
 
         ],
         'reservedDate' =>
