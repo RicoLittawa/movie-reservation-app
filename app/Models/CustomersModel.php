@@ -12,7 +12,7 @@ class CustomersModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['referenceNumber', 'customerName', 'reservedDate'];
+    protected $allowedFields    = ['referenceNumber', 'customerName', 'customerEmail', 'customerAddress', 'costumerContact', 'reservedDate'];
 
     // Dates
     protected $useTimestamps = false;
@@ -24,6 +24,9 @@ class CustomersModel extends Model
     // Validation
     protected $validationRules      = [
         'customerName' => 'required|max_length[30]|alpha_numeric_space|min_length[3]',
+        'customerEmail' => 'required|valid_email|is_unique[customers.customerEmail]',
+        'customerAddress' => 'required|max_length[30]|min_length[3]',
+        'customerContact' => 'required|exact_length[11]|numeric',
         'reservedDate' => 'required|valid_date'
     ];
     protected $validationMessages   = [
@@ -34,9 +37,29 @@ class CustomersModel extends Model
             'max_length' => 'Fullname must be at least 30 characters in length',
             'alpha_numeric_space' => 'Fullname may only contain alphanumeric and space characters'
         ],
-        'reservedDate' => [
-            'required'=>'Date is required',
-            'valid_date'=>'Date should be on a valid format'
+        'customerEmail' =>
+        [
+            'required' => 'Email is required',
+            'valid_email' => 'Email address must be in a valid format',
+            'is_unique' => 'Email address is already taken',
+        ],
+        'customerAddress' =>
+        [
+            'required' => 'Address is required',
+            'max_length' => 'Address must be at least 50 characters in length',
+            'min_length' => 'Address must be at least 3 characters in length',
+        ],
+        'customerContact' =>
+        [
+            'required' => 'Contact is required',
+            'exact_length' => 'Contact must be at least 11 digits',
+            'numeric' => 'Contact must contain numeric characters only',
+
+        ],
+        'reservedDate' =>
+        [
+            'required' => 'Date is required',
+            'valid_date' => 'Date should be on a valid format'
         ]
     ];
     protected $skipValidation       = false;

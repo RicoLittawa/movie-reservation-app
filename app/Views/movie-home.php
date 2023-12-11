@@ -13,7 +13,7 @@
         <h1>Movie Seats</h1>
     </div>
     <div class="my-5">
-        <button class="btn btn-light me-2">View Customers</button>
+        <a href="<?= base_url(route_to('view_customers')) ?>" class="btn btn-light me-2">View Customers</a>
         <a href="<?= base_url('create/add-reservation'); ?>" class="btn btn-secondary">Create Reservation</a>
     </div>
 </div>

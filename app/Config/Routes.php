@@ -10,10 +10,9 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'MovieHomeController::index');
 $routes->get('/create/add-reservation', 'MovieHomeController::display');
 $routes->get('/login/login-page', 'AdminLoginController::index');
-// $routes->get('form', 'MovieHomeController::save');
-
+$routes->get('/customers/list-customers', 'ViewCustomersController::index', ['as' => 'view_customers']);
 
 //Post Methods
 $routes->post('create/add-reservation', 'MovieHomeController::save');
-$routes->post('/', 'MovieHomeController::index');
 
+$routes->match(['get','post'],'/update/update-reservation/(:num)', 'ViewCustomersController::update/$1', ['as' => 'update_reservation']);

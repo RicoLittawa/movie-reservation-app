@@ -45,15 +45,22 @@ class MovieHomeController extends BaseController
     {
         //Data from input fields
         $customerName = $this->request->getPost('customerName');
+        $customerEmail = $this->request->getPost('customerEmail');
+        $customerAddress = $this->request->getPost('customerAddress');
+        $customerContact = $this->request->getPost('customerContact');
         $referenceNumber = $this->request->getPost('referenceNumber');
         $reservedDate = $this->request->getPost('reservedDate');
         $seatlist = (array) $this->request->getPost('seatlist');
+
 
 
         //Data array
         $dataToSave = [
             'customer' => [
                 'customerName' => $customerName,
+                'customerEmail' => $customerEmail,
+                'customerAddress' => $customerAddress,
+                'customerContact' => $customerContact,
                 'referenceNumber' => $referenceNumber,
                 'reservedDate' => $reservedDate
             ],
@@ -94,7 +101,7 @@ class MovieHomeController extends BaseController
             $this->mdlSelectedSeats->insertBatch($selectedSeatsArr);
             $this->mdlReference->whereIn('id', [$referenceNumber])->set(['id' => $newRef])->update();
             $this->mdlSeats->whereIn('seat_number', $seatlist)->set(['selected' => true])->update();
-            return redirect()->to('/')->with('success', 'Successfully created');
+            return redirect()->to('/')->with('success', 'Successfully created a reservation');
         }
         return view('create/add-reservation');
     }
