@@ -33,7 +33,7 @@
                         <td><?= $customer['reservedDate'] ?></td>
                         <td>
                             <a href="<?= base_url(route_to('update_reservation', $customer['referenceNumber'])) ?>" class="btn btn-secondary">View</a>
-                            <button class="btn btn-danger ms-2">Delete</button>
+                            <a href="<?= base_url(route_to('delete_confirmation', $customer['referenceNumber'])) ?>" class="btn btn-danger ms-2">Delete</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

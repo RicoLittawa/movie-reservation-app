@@ -15,4 +15,6 @@ $routes->get('/customers/list-customers', 'ViewCustomersController::index', ['as
 //Post Methods
 $routes->post('/create/add-reservation', 'MovieHomeController::save');
 
-$routes->match(['get','post'],'/update/update-reservation/(:num)', 'ViewCustomersController::update/$1', ['as' => 'update_reservation']);
+$routes->match(['get', 'post'], '/update/update-reservation/(:num)', 'ViewCustomersController::update/$1', ['as' => 'update_reservation']);
+$routes->match(['get', 'post'], '/delete/delete-reservation/(:num)', 'ViewCustomersController::confirmDelete/$1', ['as' => 'delete_confirmation']);
+$routes->match(['get', 'post'], '/delete/(:num)', 'ViewCustomersController::delete/$1', ['as' => 'delete_reservation']);

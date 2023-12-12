@@ -5,10 +5,11 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\CustomersModel;
 use App\Models\SelectedSeatsModel;
+use App\Models\MovieSeatsModel;
 
 class ViewCustomersController extends BaseController
 {
-    protected $mdlCustomer, $mdlselectedSeat, $data;
+    protected $mdlCustomer, $mdlselectedSeat, $mdlSeat, $data;
     protected $helpers = ['form'];
 
 
@@ -16,6 +17,7 @@ class ViewCustomersController extends BaseController
     {
         $this->mdlCustomer = new CustomersModel();
         $this->mdlselectedSeat = new SelectedSeatsModel();
+        $this->mdlSeat = new MovieSeatsModel();
         $this->data = [];
     }
     public function index()
@@ -23,7 +25,7 @@ class ViewCustomersController extends BaseController
         $this->data['customers'] = $this->mdlCustomer->findAll();
         return view('customers/list-customers', $this->data);
     }
-    public function update($referenceNumber = null)
+    public function update($referenceNumber)
     {
         $this->data['seats'] = $this->mdlselectedSeat->where('referenceNumber', $referenceNumber)->findAll();
         $this->data['customer'] = $this->mdlCustomer->where('referenceNumber', $referenceNumber)->findAll();
@@ -58,5 +60,22 @@ class ViewCustomersController extends BaseController
             return redirect()->to('/')->with('success', 'Successfully updated a reservation');
         }
         return view('update/update-reservation', $this->data);
+    }
+    public function confirmDelete($referenceNumber)
+    {
+        $this->data['customer'] = $this->mdlCustomer->where('referenceNumber', [$referenceNumber])->findAll();
+        return view('delete/delete-reservation', $this->data);
+    }
+    public function delete($referenceNumber)
+    {
+        $selectedSeat = $this->mdlselectedSeat->where('referenceNumber', [$referenceNumber])->findColumn('seatNumber');
+
+        $updateMovieSeat = $this->mdlSeat->whereIn('seat_number', $selectedSeat)->set(['selected' => false])->update();
+
+        if ($updateMovieSeat) {
+            $this->mdlCustomer->where('referenceNumber', $referenceNumber)->delete();
+            $this->mdlselectedSeat->where('referenceNumber', [$referenceNumber])->delete();
+            return redirect()->to('/')->with('success', 'Successfully deleted a reservation');
+        }
     }
 }

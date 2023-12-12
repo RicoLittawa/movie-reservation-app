@@ -17,6 +17,7 @@
         <a href="<?= base_url('create/add-reservation'); ?>" class="btn btn-secondary">Create Reservation</a>
     </div>
 </div>
+<div class="d-flex justify-content-between">
 <span class="d-flex fw-bold">Label:
     <figure class="px-2 d-flex"><img width="24" height="24" src="https://img.icons8.com/material/24/FA5252/bus-seat-top-view.png" alt="bus-seat-top-view" />
         <figcaption class="px-1 fw-normal">Reserved</figcaption>
@@ -25,6 +26,8 @@
         <figcaption class="px-1 fw-normal">Not Occupied</figcaption>
     </figure>
 </span>
+<button class="btn btn-outline-danger"><i class='bx bx-reset'></i></button>
+</div>
 <div class="bg-secondary mx-5 d-flex justify-content-center py-3 my-5 text-white">
     Now Showing : Godzilla vs King Kong</div>
 <section class="mt-5 pt-5">

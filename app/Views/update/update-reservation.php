@@ -75,7 +75,8 @@
 
         <?php endforeach ?>
         <div class="d-flex justify-content-end">
-            <button type="submit" class="btn btn-secondary btn-lg">Update</button>
+            <a href="<?= base_url(route_to('view_customers')) ?>" href="<?= base_url(route_to('view_customers')) ?>" class="btn btn-danger btn-lg">Cancel</a>
+            <button type="submit" class="btn btn-secondary btn-lg ms-2">Update</button>
         </div>
 
         <?= form_close() ?>
