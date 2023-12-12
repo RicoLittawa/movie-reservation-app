@@ -34,41 +34,42 @@
     </div>
     <div>
         <h5>Personal Information</h5>
+        <?php $errors = session('errors'); ?>
         <?= form_open(route_to('update_reservation/')) ?>
         <?php foreach ($customer as $c) : ?>
             <div class="mb-3">
                 <label for="customerName" class="form-label">Fullname</label>
                 <input type="text" class="form-control" name="customerName" value="<?= set_value('customerName', esc($c['customerName'])) ?>">
-                <?php if (isset(session('errors')['customerName'])) :  ?>
+                <?php if (isset($errors['customerName'])) :  ?>
                     <div class="text-danger">
-                        <?= esc(session('errors')['customerName']) ?>
+                        <?= esc($errors['customerName']) ?>
                     </div>
                 <?php endif; ?>
             </div>
             <div class="mb-3">
                 <label for="customerEmail" class="form-label">Fullname</label>
                 <input type="text" class="form-control" name="customerEmail" value="<?= set_value('customerEmail', esc($c['customerEmail'])) ?>">
-                <?php if (isset(session('errors')['customerEmail'])) :  ?>
+                <?php if (isset($errors['customerEmail'])) :  ?>
                     <div class="text-danger">
-                        <?= esc(session('errors')['customerEmail']) ?>
+                        <?= esc($errors['customerEmail']) ?>
                     </div>
                 <?php endif; ?>
             </div>
             <div class="mb-3">
                 <label for="customerAddress" class="form-label">Fullname</label>
                 <input type="text" class="form-control" name="customerAddress" value="<?= set_value('customerAddress', esc($c['customerAddress'])) ?>">
-                <?php if (isset(session('errors')['customerAddress'])) :  ?>
+                <?php if (isset($errors['customerAddress'])) :  ?>
                     <div class="text-danger">
-                        <?= esc(session('errors')['customerAddress']) ?>
+                        <?= esc($errors['customerAddress']) ?>
                     </div>
                 <?php endif; ?>
             </div>
             <div class="mb-3">
                 <label for="customerContact" class="form-label">Fullname</label>
                 <input type="text" class="form-control" name="customerContact" value="<?= set_value('customerContact', esc($c['customerContact'])) ?>">
-                <?php if (isset(session('errors')['customerContact'])) :  ?>
+                <?php if (isset($errors['customerContact'])) :  ?>
                     <div class="text-danger">
-                        <?= esc(session('errors')['customerContact']) ?>
+                        <?= esc($errors['customerContact']) ?>
                     </div>
                 <?php endif; ?>
             </div>

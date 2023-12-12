@@ -17,7 +17,6 @@
                     <div class="text-center">
                         <h4 class="card-title">Do you want to delete this data of <strong><?= $c['customerName'] ?></strong>?</h4>
                         <p class="text-muted">All of its data will be deleted</p>
-                        <?= $c['referenceNumber'] ?>
                     </div>
                     <div class="text-center">
                         <img src="<?= base_url('/assets/undraw_throw_away_re_x60k.svg') ?>" alt="" width="200" height="200">

@@ -23,8 +23,7 @@ class LoginController extends BaseController
         $mdlUser = new UserAccountModel();
         $user = ['username' => $username, 'password' => $userpassword];
         $errors = [
-            'password' => 'Password does not match',
-            'username' => 'User does not exist'
+            'warning' => 'Password does not match',
         ];
         if ($this->request->is('post')) {
 

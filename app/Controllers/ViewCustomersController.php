@@ -75,7 +75,7 @@ class ViewCustomersController extends BaseController
         if ($updateMovieSeat) {
             $this->mdlCustomer->where('referenceNumber', $referenceNumber)->delete();
             $this->mdlselectedSeat->where('referenceNumber', [$referenceNumber])->delete();
-            return redirect()->to('/')->with('success', 'Successfully deleted a reservation');
+            return redirect()->to('/view')->with('success', 'Successfully deleted a reservation');
         }
     }
 }

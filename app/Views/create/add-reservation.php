@@ -9,62 +9,63 @@
         <h1 class="mx-2">Add Reservation</h1>
     </div>
     <div>
+        <?php $errors = session('errors'); ?>
         <?= form_open('/create') ?>
         <input type="text" value="<?= set_value('referenceNumber', esc($referenceNumber)) ?>" name="referenceNumber" hidden>
         <div class="mb-3">
             <label for="customerName" class="form-label">Fullname</label>
             <input type="text" class="form-control 
-            <?php if (isset(session('errors')['customerName'])) {
+            <?php if (isset($errors['customerName'])) {
                 echo "is-invalid";
             } ?>" id="customerName" name="customerName" value="<?= set_value('customerName') ?>">
-            <?php if (isset(session('errors')['customerName'])) :  ?>
+            <?php if (isset($errors['customerName'])) :  ?>
                 <div class="text-danger">
-                    <?= esc(session('errors')['customerName']) ?>
+                    <?= esc($errors['customerName']) ?>
                 </div>
             <?php endif; ?>
         </div>
         <div class="mb-3">
             <label for="customerEmail">Email</label>
             <input type="email" name="customerEmail" class="form-control
-            <?php if (isset(session('errors')['customerEmail'])) {
+            <?php if (isset($errors['customerEmail'])) {
                 echo "is-invalid";
             } ?>" value="<?= set_value('customerEmail') ?>">
-            <?php if (isset(session('errors')['customerEmail'])) :  ?>
+            <?php if (isset($errors['customerEmail'])) :  ?>
                 <div class="text-danger">
-                    <?= esc(session('errors')['customerEmail']) ?>
+                    <?= esc($errors['customerEmail']) ?>
                 </div>
             <?php endif; ?>
         </div>
         <div class="mb-3">
             <label for="customerAddress">Address</label>
             <input type="text" name="customerAddress" class="form-control
-            <?php if (isset(session('errors')['customerAddress'])) {
+            <?php if (isset($errors['customerAddress'])) {
                 echo "is-invalid";
             } ?>" value="<?= set_value('customerAddress') ?>">
-            <?php if (isset(session('errors')['customerAddress'])) :  ?>
+            <?php if (isset($errors['customerAddress'])) :  ?>
                 <div class="text-danger">
-                    <?= esc(session('errors')['customerAddress']) ?>
+                    <?= esc($errors['customerAddress']) ?>
                 </div>
             <?php endif; ?>
         </div>
         <div class="mb-3">
             <label for="customerContact">Contact Number</label>
             <input type="number" name="customerContact" class="form-control
-            <?php if (isset(session('errors')['customerContact'])) {
+            <?php if (isset($errors['customerContact'])) {
                 echo "is-invalid";
             } ?>" value="<?= set_value('customerContact') ?>">
-            <?php if (isset(session('errors')['customerContact'])) :  ?>
+            <?php if (isset($errors['customerContact'])) :  ?>
                 <div class="text-danger">
-                    <?= esc(session('errors')['customerContact']) ?>
+                    <?= esc($errors['customerContact']) ?>
                 </div>
             <?php endif; ?>
         </div>
         <div class="checkboxes">
             <div>
                 <label for="" class="form-label">Select seats:</label>
-                <?php if (isset(session('errors')['seatNumber'])) :  ?>
+                <?php if (isset($errors['seatNumber'])) :  ?>
                     <div class="text-danger">
-                        <?= esc(session('errors')['seatNumber']) ?>
+                        <?= esc($errors['seatNumber']) ?>
                     </div>
                 <?php endif; ?>
                 <span class="d-flex fw-bold">Label:
@@ -179,12 +180,12 @@
         <div class="mb-3">
             <label for="reservedDate" class="form-label">Date Reserved</label>
             <input type="date" class="form-control
-            <?php if (isset(session('errors')['reservedDate'])) {
+            <?php if (isset($errors['reservedDate'])) {
                 echo "is-invalid";
             } ?>" name="reservedDate" id="reservedDate" value="<?= set_value('reservedDate') ?>">
-            <?php if (isset(session('errors')['reservedDate'])) :  ?>
+            <?php if (isset($errors['reservedDate'])) :  ?>
                 <div class="text-danger">
-                    <?= esc(session('errors')['reservedDate']) ?>
+                    <?= esc($errors['reservedDate']) ?>
                 </div>
             <?php endif; ?>
         </div>

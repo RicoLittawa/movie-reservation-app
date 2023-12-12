@@ -25,7 +25,6 @@ class LoginFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-       
     }
 
     /**
@@ -44,8 +43,9 @@ class LoginFilter implements FilterInterface
     {
         $session = session();
         // Check if the user is logged in
-        if ( !($session->get('isLoggedIn'))) {
-            return redirect()->route('login');
+        $errors = ['warning' => 'You are not logged in to the application!'];
+        if (!($session->get('isLoggedIn'))) {
+            return redirect()->route('login')->with('errors', $errors);
         }
     }
 }
