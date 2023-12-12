@@ -23,11 +23,13 @@ class MovieHomeController extends BaseController
         $this->mdlSelectedSeats = new SelectedSeatsModel();
         $this->data = [];
     }
+    //Display seats for home page
     public function index()
     {
         $this->findData();
         return view('movie-home', $this->data);
     }
+    //Display seats for add reservation page
     public function display()
     {
         $referenceNumber = $this->mdlReference->select('id')->first();
@@ -36,11 +38,12 @@ class MovieHomeController extends BaseController
         return view('create/add-reservation', $this->data);
     }
 
+    //Find data for seats
     private function findData()
     {
         return $this->data['seats'] = $this->mdlSeats->findAll();
     }
-
+    //Save Reservation
     public function save()
     {
         //Data from input fields
@@ -82,7 +85,7 @@ class MovieHomeController extends BaseController
                     $errors = array_merge($errors, $this->mdlSelectedSeats->errors());
                 }
                 if (!empty($errors)) {
-                    return redirect()->to('/create/add-reservation')->with('errors', $errors)->withInput();
+                    return redirect()->to('/create')->with('errors', $errors)->withInput();
                 }
             }
 
@@ -102,6 +105,5 @@ class MovieHomeController extends BaseController
             $this->mdlSeats->whereIn('seat_number', $seatlist)->set(['selected' => true])->update();
             return redirect()->to('/')->with('success', 'Successfully created a reservation');
         }
-        return view('create/add-reservation');
     }
 }

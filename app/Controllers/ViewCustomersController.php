@@ -57,7 +57,7 @@ class ViewCustomersController extends BaseController
             $this->mdlCustomer->whereIn('referenceNumber', [$referenceNumber])->set(
                 ['customerName' => $customerName, 'customerEmail' => $customerEmail, 'customerAddress' => $customerAddress, 'customerContact' => $customerContact]
             )->update();
-            return redirect()->to('/')->with('success', 'Successfully updated a reservation');
+            return redirect()->to('/view')->with('success', 'Successfully updated a reservation');
         }
         return view('update/update-reservation', $this->data);
     }

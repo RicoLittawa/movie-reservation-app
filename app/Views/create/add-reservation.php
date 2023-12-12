@@ -9,7 +9,7 @@
         <h1 class="mx-2">Add Reservation</h1>
     </div>
     <div>
-        <?= form_open('create/add-reservation') ?>
+        <?= form_open('/create') ?>
         <input type="text" value="<?= set_value('referenceNumber', esc($referenceNumber)) ?>" name="referenceNumber" hidden>
         <div class="mb-3">
             <label for="customerName" class="form-label">Fullname</label>

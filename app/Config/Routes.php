@@ -6,15 +6,20 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-//Get Methods
-$routes->get('/', 'MovieHomeController::index');
-$routes->get('/create/add-reservation', 'MovieHomeController::display');
-$routes->get('/login/login-page', 'AdminLoginController::index');
-$routes->get('/customers/list-customers', 'ViewCustomersController::index', ['as' => 'view_customers']);
+//Content
 
-//Post Methods
-$routes->post('/create/add-reservation', 'MovieHomeController::save');
+$routes->get('/', 'MovieHomeController::index', ['filter' => 'login']);
 
-$routes->match(['get', 'post'], '/update/update-reservation/(:num)', 'ViewCustomersController::update/$1', ['as' => 'update_reservation']);
-$routes->match(['get', 'post'], '/delete/delete-reservation/(:num)', 'ViewCustomersController::confirmDelete/$1', ['as' => 'delete_confirmation']);
-$routes->match(['get', 'post'], '/delete/(:num)', 'ViewCustomersController::delete/$1', ['as' => 'delete_reservation']);
+$routes->get('/create', 'MovieHomeController::display', ['filter' => 'login']);
+$routes->get('/view', 'ViewCustomersController::index', ['filter' => 'login']);
+
+//Process Routes
+$routes->post('/create', 'MovieHomeController::save');
+$routes->post('/update/(:num)', 'ViewCustomersController::update/$1', ['as' => 'update_reservation']);
+$routes->post('/confirm-delete/(:num)', 'ViewCustomersController::confirmDelete/$1', ['as' => 'delete_confirmation']);
+$routes->post('/delete/(:num)', 'ViewCustomersController::delete/$1', ['as' => 'delete_reservation']);
+
+//Login
+$routes->get('/login', 'LoginController::index',['filter' => 'noauth']);
+$routes->post('/login', 'LoginController::submit');
+$routes->get('/logout', 'LoginController::logout');

@@ -3,30 +3,25 @@
 
 <!-- Set the section content -->
 <?= $this->section('content') ?>
-<?php if (session()->has('success')) : ?>
-    <div>
-        <?= esc(session('success')) ?>
-    </div>
-<?php endif ?>
 <div class="d-flex justify-content-between">
     <div class="my-5">
         <h1>Movie Seats</h1>
     </div>
     <div class="my-5">
-        <a href="<?= base_url(route_to('view_customers')) ?>" class="btn btn-light me-2">View Customers</a>
-        <a href="<?= base_url('create/add-reservation'); ?>" class="btn btn-secondary">Create Reservation</a>
+        <a href="<?= base_url('view') ?>" class="btn btn-light me-2">View Customers</a>
+        <a href="<?= base_url('create'); ?>" class="btn btn-secondary">Create Reservation</a>
+        <a href="<?= base_url('logout')  ?>" class="btn btn-danger"><i class='bx bx-log-out-circle'></i></a>
     </div>
 </div>
 <div class="d-flex justify-content-between">
-<span class="d-flex fw-bold">Label:
-    <figure class="px-2 d-flex"><img width="24" height="24" src="https://img.icons8.com/material/24/FA5252/bus-seat-top-view.png" alt="bus-seat-top-view" />
-        <figcaption class="px-1 fw-normal">Reserved</figcaption>
-    </figure>
-    <figure class="px-2 d-flex"><img width="24" height="24" src="https://img.icons8.com/material/24/737373/bus-seat-top-view.png" alt="bus-seat-top-view" />
-        <figcaption class="px-1 fw-normal">Not Occupied</figcaption>
-    </figure>
-</span>
-<button class="btn btn-outline-danger"><i class='bx bx-reset'></i></button>
+    <span class="d-flex fw-bold">Label:
+        <figure class="px-2 d-flex"><img width="24" height="24" src="https://img.icons8.com/material/24/FA5252/bus-seat-top-view.png" alt="bus-seat-top-view" />
+            <figcaption class="px-1 fw-normal">Reserved</figcaption>
+        </figure>
+        <figure class="px-2 d-flex"><img width="24" height="24" src="https://img.icons8.com/material/24/737373/bus-seat-top-view.png" alt="bus-seat-top-view" />
+            <figcaption class="px-1 fw-normal">Not Occupied</figcaption>
+        </figure>
+    </span>
 </div>
 <div class="bg-secondary mx-5 d-flex justify-content-center py-3 my-5 text-white">
     Now Showing : Godzilla vs King Kong</div>

@@ -6,7 +6,7 @@
 
 <section class="my-5">
     <div class="d-flex my-5">
-        <a href="<?= base_url(route_to('view_customers')) ?>" class="btn fs-3 "><i class='bx bx-arrow-back'></i></a>
+        <a href="<?= base_url('view') ?>" class="btn fs-3 "><i class='bx bx-arrow-back'></i></a>
         <h1 class="mx-2">Update Information</h1>
     </div>
     <div>
@@ -75,7 +75,7 @@
 
         <?php endforeach ?>
         <div class="d-flex justify-content-end">
-            <a href="<?= base_url(route_to('view_customers')) ?>" href="<?= base_url(route_to('view_customers')) ?>" class="btn btn-danger btn-lg">Cancel</a>
+            <a href="<?= base_url('view') ?>" class="btn btn-danger btn-lg">Cancel</a>
             <button type="submit" class="btn btn-secondary btn-lg ms-2">Update</button>
         </div>
 
