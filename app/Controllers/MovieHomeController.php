@@ -71,7 +71,7 @@ class MovieHomeController extends BaseController
         ];
 
         if ($this->request->is('post')) {
-            $validateCustomer = $this->mdlCustomer->validate($dataToSave['customer']);
+            $validateCustomer = $this->mdlCustomer->validateAdd($dataToSave['customer'], $referenceNumber);
             $validateSeat = $this->mdlSelectedSeats->validate($dataToSave['selectedSeat']);
             if (!$validateCustomer || $validateSeat) {
                 $errors = [];
