@@ -6,7 +6,6 @@ use App\Models\MovieSeatsModel;
 use App\Models\ReferenceModel;
 use App\Models\CustomersModel;
 use App\Models\SelectedSeatsModel;
-// defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MovieHomeController extends BaseController
 {
@@ -74,6 +73,7 @@ class MovieHomeController extends BaseController
         ];
 
         if ($this->request->is('post')) {
+            //Validate input fields
             $validateCustomer = $this->mdlCustomer->validateAdd($dataToSave['customer'], $referenceNumber);
             $validateSeat = $this->mdlSelectedSeats->validate($dataToSave['selectedSeat']);
             if (!$validateCustomer || $validateSeat) {
@@ -89,7 +89,7 @@ class MovieHomeController extends BaseController
                 }
             }
 
-
+            //Make an array to store seats to the selected seats table each row
             $selectedSeatsArr = [];
             foreach ($dataToSave['selectedSeat']['seatNumber'] as $seat) {
                 $selectedSeatsArr[] = [
@@ -97,8 +97,10 @@ class MovieHomeController extends BaseController
                     'seatNumber' => $seat,
                 ];
             }
+            //If success + 1 to the value of reference number
             $newRef = $referenceNumber + 1;
 
+            //Query processes
             $this->mdlCustomer->insert($dataToSave['customer']);
             $this->mdlSelectedSeats->insertBatch($selectedSeatsArr);
             $this->mdlReference->whereIn('id', [$referenceNumber])->set(['id' => $newRef])->update();

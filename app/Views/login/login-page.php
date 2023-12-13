@@ -3,14 +3,16 @@
 
 <!-- Set the section content -->
 <?= $this->section('content') ?>
-<?php $errors = session('errors'); ?>
+<?php
+$errors = session('errors'); ?>
 <div class=" d-flex justify-content-center my-5 py-5">
     <div class="card w-50 bg-light bg-gradient">
         <div class="card-body">
             <h3 class="card-title text-center my-3">Login</h3>
-            <?php if (isset($errors['warning'])) : ?>
-                <div class="alert alert-warning"> <?= esc($errors['warning']) ?>
-                </div>
+            <?php if (session()->has('warning')) : ?>
+                <div class="alert alert-warning"><?= esc(session()->getFlashdata('warning')) ?></div>
+            <?php elseif (isset($errors['warning'])) : ?>
+                <div class="alert alert-warning"><?= esc($errors['warning']) ?></div>
             <?php endif ?>
             <?= form_open('/login') ?>
             <div class="mb-3">

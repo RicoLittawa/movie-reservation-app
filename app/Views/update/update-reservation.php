@@ -39,7 +39,10 @@
         <?php foreach ($customer as $c) : ?>
             <div class="mb-3">
                 <label for="customerName" class="form-label">Fullname</label>
-                <input type="text" class="form-control" name="customerName" value="<?= set_value('customerName', esc($c['customerName'])) ?>">
+                <input type="text" class="form-control
+                <?php if (isset($errors['customerName'])) {
+                    echo 'is-invalid';
+                } ?>" name="customerName" value="<?= set_value('customerName', esc($c['customerName'])) ?>">
                 <?php if (isset($errors['customerName'])) :  ?>
                     <div class="text-danger">
                         <?= esc($errors['customerName']) ?>
@@ -47,8 +50,11 @@
                 <?php endif; ?>
             </div>
             <div class="mb-3">
-                <label for="customerEmail" class="form-label">Fullname</label>
-                <input type="text" class="form-control" name="customerEmail" value="<?= set_value('customerEmail', esc($c['customerEmail'])) ?>">
+                <label for="customerEmail" class="form-label">Email</label>
+                <input type="text" class="form-control
+                <?php if (isset($errors['customerEmail'])) {
+                    echo 'is-invalid';
+                } ?>" name="customerEmail" value="<?= set_value('customerEmail', esc($c['customerEmail'])) ?>">
                 <?php if (isset($errors['customerEmail'])) :  ?>
                     <div class="text-danger">
                         <?= esc($errors['customerEmail']) ?>
@@ -56,8 +62,11 @@
                 <?php endif; ?>
             </div>
             <div class="mb-3">
-                <label for="customerAddress" class="form-label">Fullname</label>
-                <input type="text" class="form-control" name="customerAddress" value="<?= set_value('customerAddress', esc($c['customerAddress'])) ?>">
+                <label for="customerAddress" class="form-label">Address</label>
+                <input type="text" class="form-control
+                <?php if (isset($errors['customerAddress'])) {
+                    echo 'is-invalid';
+                } ?>" name="customerAddress" value="<?= set_value('customerAddress', esc($c['customerAddress'])) ?>">
                 <?php if (isset($errors['customerAddress'])) :  ?>
                     <div class="text-danger">
                         <?= esc($errors['customerAddress']) ?>
@@ -65,8 +74,11 @@
                 <?php endif; ?>
             </div>
             <div class="mb-3">
-                <label for="customerContact" class="form-label">Fullname</label>
-                <input type="text" class="form-control" name="customerContact" value="<?= set_value('customerContact', esc($c['customerContact'])) ?>">
+                <label for="customerContact" class="form-label">Contact Number</label>
+                <input type="text" class="form-control
+                <?php if (isset($errors['customerContact'])) {
+                    echo 'is-invalid';
+                } ?>" name="customerContact" value="<?= set_value('customerContact', esc($c['customerContact'])) ?>">
                 <?php if (isset($errors['customerContact'])) :  ?>
                     <div class="text-danger">
                         <?= esc($errors['customerContact']) ?>

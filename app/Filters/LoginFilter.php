@@ -43,9 +43,9 @@ class LoginFilter implements FilterInterface
     {
         $session = session();
         // Check if the user is logged in
-        $errors = ['warning' => 'You are not logged in to the application!'];
         if (!($session->get('isLoggedIn'))) {
-            return redirect()->route('login')->with('errors', $errors);
+            $session->setFlashdata('warning','You are not logged in to the application!');
+            return redirect()->route('login');
         }
     }
 }
